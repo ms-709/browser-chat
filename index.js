@@ -21,7 +21,11 @@ io.on('connection', function(socket)
 { 
     console.log(`made socket connection`, socket.id);
 
+    // socket.on('sendMessage', function(data){
+    //     io.sockets.emit('sendMessage', data)
+    // });
+
     socket.on('sendMessage', function(data){
-        io.sockets.emit('sendMessage', data)
+        socket.broadcast.emit('sendMessage', data)
     });
 }); 

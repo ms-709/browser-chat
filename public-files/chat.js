@@ -11,22 +11,32 @@ var chatWindow = document.getElementById('chat-window'),
 
 sendButton.addEventListener('click', function(){
     socket.emit('sendMessage', {
-        chatMessage: chatBox.value,
-        username: usernameBox.value
+        username: usernameBox.value,
+        chatMessage: chatBox.value
     });
+
+    chatWindow.innerHTML += '<div class="chat-message-outgoing">' + 
+                                '<div class="message-name">' + 
+                                    '<h2>' + usernameBox.value + '</h2>' + 
+                                '</div>' + 
+                            '<div class = "message-body">' + 
+                                '<p>' + chatBox.value + '</p>' + 
+                            '</div> </div>';
+
+    chatWindow.scrollTop = chatWindow.scrollHeight; // *this scrolls the thing to show new messages at bottom
 });
 
 chatBox.addEventListener('keydown', function(event){
     if(event.key === 'Enter')
     {
-        sendButton.click();
+        sendButton.click(); 
     }
 });
 
 //---------- LISTEN EVENTS ----------//
 
 socket.on('sendMessage', function(data){
-    chatWindow.innerHTML += '<div class="chat-message">' + 
+    chatWindow.innerHTML += '<div class="chat-message-incoming">' + 
                                 '<div class="message-name">' + 
                                     '<h2>' + data.username + '</h2>' + 
                                 '</div>' + 
@@ -34,5 +44,5 @@ socket.on('sendMessage', function(data){
                                 '<p>' + data.chatMessage + '</p>' + 
                             '</div> </div>';
 
-    chatWindow.scrollTop = chatWindow.scrollHeight; // this scrolls the thing to show new messages at bottom
+    chatWindow.scrollTop = chatWindow.scrollHeight; // *
 });
