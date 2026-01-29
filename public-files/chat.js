@@ -10,18 +10,36 @@ var chatWindow = document.getElementById('chat-window'),
 //---------- EMIT EVENTS ----------//
 
 sendButton.addEventListener('click', function(){
-    socket.emit('sendMessage', {
-        username: usernameBox.value,
-        chatMessage: chatBox.value
-    });
+    if(usernameBox.value === "")
+    {
+        chatWindow.innerHTML += '<div class="chat-message-outgoing">' + 
+                                    // '<div class="message-name">' + 
+                                    //     '<h2>' + '\> System Message \<' + '</h2>' + 
+                                    // '</div>' + 
+                                '<div class = "message-body">' + 
+                                    '<p>' + 'You need to set a username before sending a message!' + '</p>' + 
+                                '</div> </div>';
+    }
+    else
+    {
+        socket.emit('sendMessage', {
+            username: usernameBox.value,
+            chatMessage: chatBox.value
+        });
 
-    chatWindow.innerHTML += '<div class="chat-message-outgoing">' + 
-                                '<div class="message-name">' + 
-                                    '<h2>' + usernameBox.value + '</h2>' + 
-                                '</div>' + 
-                            '<div class = "message-body">' + 
-                                '<p>' + chatBox.value + '</p>' + 
-                            '</div> </div>';
+        // create the local message
+        chatWindow.innerHTML += '<div class="chat-message-outgoing">' + 
+                                    '<div class="message-name">' + 
+                                        '<h2>' + usernameBox.value + '</h2>' + 
+                                    '</div>' + 
+                                '<div class = "message-body">' + 
+                                    '<p>' + chatBox.value + '</p>' + 
+                                '</div> </div>';
+
+        chatBox.value = ""; // clear the message box on send
+    }
+
+
 
     chatWindow.scrollTop = chatWindow.scrollHeight; // *this scrolls the thing to show new messages at bottom
 });
