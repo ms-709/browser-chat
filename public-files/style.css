@@ -172,6 +172,7 @@ p{
 }
 
 #message-preview-label{
+    color: #1c1c1c;
     margin: 10px auto auto auto;
     font-size: 1em;
 }
@@ -231,13 +232,14 @@ p{
     word-break: break-all;
 }
 
-#name-color-picker
-{
+#name-color-picker{
     color: #ededed;
 
     margin: 10px auto 10px;
     height: 30px;
     width: 85%;
+
+    outline: none;
 
     border-color: #9a9a9a;
     border-style: outset;
@@ -276,8 +278,7 @@ p{
     height: 100px;
 }
 
-#chatbox-and-sendbutton-container
-{
+#chatbox-and-sendbutton-container{
     display: flex;
     margin: 20px auto 0 auto;
     
