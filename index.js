@@ -19,13 +19,19 @@ var io = socket(server);
 
 io.on('connection', function(socket)
 { 
-    console.log(`made socket connection`, socket.id);
+    console.log(`socket connection:`, socket.id);
+    io.sockets.emit('userConnect', socket.id);
 
-    // socket.on('sendMessage', function(data){
-    //     io.sockets.emit('sendMessage', data)
-    // });
-
+    // broadcasts message to others. local message handled in chat.js
     socket.on('sendMessage', function(data){
         socket.broadcast.emit('sendMessage', data)
     });
+
+    socket.on('disconnect', function()
+    {
+        console.log(`socket disconnection:`, socket.id);
+        socket.broadcast.emit('userDisconnect', socket.id);
+    });
+
 }); 
+

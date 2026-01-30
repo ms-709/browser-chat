@@ -79,7 +79,13 @@ nameColorPicker.addEventListener('change', function(){
 
 //---------- LISTEN EVENTS ----------//
 
-socket.on('sendMessage', function(data){
+socket.on('userConnect', function(userConnectID)
+{
+    console.log('connect ID:', userConnectID)
+});
+
+socket.on('sendMessage', function(data)
+{
     chatWindow.innerHTML += '<div class="chat-message-incoming">' + 
                                 '<div class="message-name"  style="background-color: ' + data.namecolor + '; border-color: ' + data.bordercolor + ';">' +  
                                     '<h2>' + data.username + '</h2>' + 
@@ -89,4 +95,9 @@ socket.on('sendMessage', function(data){
                             '</div> </div>';
 
     chatWindow.scrollTop = chatWindow.scrollHeight; // *
+});
+
+socket.on('userDisconnect', function(userDisconnectID)
+{
+    console.log(`disconnect ID:`, userDisconnectID);
 });
