@@ -15,15 +15,18 @@
 
         [ ] fix width on header when window is halved
         
+        [ ] have clients send username update on startup to avoid cookie stored entry mismatches 
+            [ ] initialize client username to Unnamed User
+        
         [ ] list of connected users
             [√] create server-client connect/disconnect functions
             [ ] array, 2d array, or hash table user list 
 
             [ ] finish server-client connect/disconnect functions
                 [ ] client sends connect/disconnect signal server
-                ![ ] server updates list accordingly     -OR-    sends signal to clients to update their lists
-                ![ ] server sends back updated list      -OR-    clients modify their lists accordingly
-                [ ] clients print array to console
+                [ ] server updates list accordingly
+                [ ] server sends back updated list
+                [ ] clients print list to console
                 [ ] clients draw array on screen using innerHTML, with custom name colors and usernames 
             
             [ ] client sends request to server to change username

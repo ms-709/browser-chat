@@ -15,9 +15,16 @@ var messageNameColor = nameColorPicker.value,
     messageNameBorderColor = `color-mix(in srgb, ${messageNameColor} 90%, white 10% )`;
 
 //---------- INITIALIZE ----------//
-sampleMessageName.innerHTML = '<p>' + usernameBox.value + '</p>';// necessary to reflect attributes persisting with cookies
-sampleMessageName.style.backgroundColor = messageNameColor; // ^
-sampleMessageName.style.borderColor = messageNameBorderColor; // ^
+
+// the following initialize attributes to reflect cookie-stored data 
+sampleMessageName.innerHTML = '<p>' + usernameBox.value + '</p>';
+sampleMessageName.style.backgroundColor = messageNameColor;
+sampleMessageName.style.borderColor = messageNameBorderColor;
+
+socket.emit('initializeUser', {
+    initialUsername: usernameBox.value,
+    initialNameColor: messageNameColor
+});
 
 //---------- EMIT EVENTS ----------//
 
@@ -53,12 +60,16 @@ sendButton.addEventListener('click', function(){
         chatBox.value = ""; // clear the message box on send
     }
 
-    chatWindow.scrollTop = chatWindow.scrollHeight; // *this scrolls the thing to show new messages at bottom
+    chatWindow.scrollTop = chatWindow.scrollHeight; // this scrolls the thing to show new messages at bottom
 });
 
 usernameBox.addEventListener('input', function(){
     sampleMessageName.innerHTML = '<p>' + usernameBox.value + '</p>';
 });
+
+usernameBox.addEventListener('change', function(){
+    socket.emit('updateUsername', usernameBox.value);
+})
 
 chatBox.addEventListener('keydown', function(event){
     if(event.key === 'Enter')
@@ -68,7 +79,7 @@ chatBox.addEventListener('keydown', function(event){
 });
 
 nameColorPicker.addEventListener('change', function(){
-    console.log(`${messageNameColor}`);
+    socket.emit('updateNameColor', nameColorPicker.value);
 
     messageNameColor = nameColorPicker.value; // update js color variable
     messageNameBorderColor = `color-mix(in srgb, ${messageNameColor} 90%, white 10% )`;
@@ -94,7 +105,7 @@ socket.on('sendMessage', function(data)
                                 '<p>' + data.chatMessage + '</p>' + 
                             '</div> </div>';
 
-    chatWindow.scrollTop = chatWindow.scrollHeight; // *
+    chatWindow.scrollTop = chatWindow.scrollHeight; // this scrolls the thing to show new messages at bottom
 });
 
 socket.on('userDisconnect', function(userDisconnectID)
