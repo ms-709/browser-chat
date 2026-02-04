@@ -13,10 +13,8 @@
             
         //---------- TO-DO ----------//
 
-        [ ] fix width on header when window is halved
-        
-        [ ] have clients send username update on startup to avoid cookie stored entry mismatches 
-            [ ] initialize client username to Unnamed User
+        [√] have clients send username update on startup to avoid cookie stored entry mismatches 
+            [√] initialize client username to Unnamed User
         
         [ ] list of connected users
             [√] create server-client connect/disconnect functions
@@ -76,7 +74,9 @@
 
             <div id="side-block">
                 <div class="mini-deco-bar"></div>
+
                 <input id="username-box" type="text" placeholder="Enter username..." maxlength="12">
+                
                 <div id="message-preview-container">
                     <h3 id="message-preview-label">Message Preview</h3>
                     <div id="chat-window-preview">
@@ -91,7 +91,33 @@
                     </div>
                     <input type="color" id="name-color-picker" value="#3d3d3d">
                 </div>
+
                 <div class="mini-deco-bar"></div>
+
+                <div id="user-list-container">
+                    <h3 id="user-list-label">Online Users</h3>
+                    <div id="user-list">
+
+                        <div id="user-list-entry">
+                            <h2>Test User</h2>
+                        </div>
+                        <div id="user-list-entry">
+                            <h2>Test User</h2>
+                        </div>
+                        <div id="user-list-entry">
+                            <h2>Test User</h2>
+                        </div>
+                        <div id="user-list-entry">
+                            <h2>Test User</h2>
+                        </div>
+                        <div id="user-list-entry">
+                            <h2>Test User</h2>
+                        </div>
+
+                    </div>
+                </div>
+                
+
             </div>
         </div>
 

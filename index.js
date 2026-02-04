@@ -16,8 +16,6 @@ app.use(express.static('public-files'));
 
 //---------- SERVERSIDE VARS ----------//
 
-// userlist entry format:
-// [socket.id, `username`, #namecolor] // OBSOLETE?
 connectionList = [];
 
 //---------- SERVERSIDE FUNCTIONALITY ----------//
