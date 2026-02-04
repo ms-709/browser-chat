@@ -13,21 +13,24 @@
             
         //---------- TO-DO ----------//
 
-        [√] have clients send username update on startup to avoid cookie stored entry mismatches 
-            [√] initialize client username to Unnamed User
-        
-        [ ] list of connected users
-            [√] create server-client connect/disconnect functions
-            [ ] array, 2d array, or hash table user list 
+        [ ] have clients send username update on startup to avoid cookie stored entry mismatches 
+            [ ] i thought i fixed this but i guess somethings not quite right
+            [√] initialize client username to (unnamed)
 
-            [ ] finish server-client connect/disconnect functions
-                [ ] client sends connect/disconnect signal server
-                [ ] server updates list accordingly
-                [ ] server sends back updated list
-                [ ] clients print list to console
-                [ ] clients draw array on screen using innerHTML, with custom name colors and usernames 
+        [ ] fix font discrepancy on message preview (probably some weird size or inheritance issue)
+        
+        [√] list of connected users
+            [√] create server-client connect/disconnect functions
+            [√] array, 2d array, or hash table user list 
+
+            [√] finish server-client connect/disconnect functions
+                [√] client sends connect/disconnect signal server
+                [√] server updates list accordingly
+                [√] server sends back updated list
+                [√] clients print list to console
+                [√] clients draw array on screen using innerHTML, with custom name colors and usernames 
             
-            [ ] client sends request to server to change username
+            [√] client sends request to server to change username
 
         -->
 
@@ -98,21 +101,11 @@
                     <h3 id="user-list-label">Online Users</h3>
                     <div id="user-list">
 
-                        <div id="user-list-entry">
+                        <!-- SAMPLE USER LIST ENTRY -->
+
+                        <!-- <div id="user-list-entry">
                             <h2>Test User</h2>
-                        </div>
-                        <div id="user-list-entry">
-                            <h2>Test User</h2>
-                        </div>
-                        <div id="user-list-entry">
-                            <h2>Test User</h2>
-                        </div>
-                        <div id="user-list-entry">
-                            <h2>Test User</h2>
-                        </div>
-                        <div id="user-list-entry">
-                            <h2>Test User</h2>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>

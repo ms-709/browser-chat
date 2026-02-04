@@ -24,7 +24,7 @@ function createUser(userID, username, nameColor)
 {
     return{
         userID: userID || "undefined",
-        username: username || "(unnamed user)",
+        username: username || "(unnamed)",
         nameColor: nameColor || "#3d3d3d",
     };
 }
@@ -71,6 +71,7 @@ io.on('connection', function(socket)
         connectionList.push(createUser(socket.id, data.initialUsername, data.initialNameColor));
 
         printConnections();
+        userListUpdate();
     })
 
     // broadcasts message to others. local message handled in chat.js
@@ -95,6 +96,7 @@ io.on('connection', function(socket)
         }
 
         printConnections();
+        userListUpdate();
     });
 
     socket.on('updateUsername', function(newUsername)
@@ -109,7 +111,7 @@ io.on('connection', function(socket)
             }
             else
             {
-                connectionList[findConnectionIndex(socket.id)].username = "(unnamed user)";
+                connectionList[findConnectionIndex(socket.id)].username = "(unnamed)";
             }
         }
         else
@@ -119,6 +121,7 @@ io.on('connection', function(socket)
 
         // console.log(`set username of: '${socket.id}' to: ${connectionList[targetIndex].username}`);
         printConnections();
+        userListUpdate();
     });
 
     // NAME COLOR CHANGES DO NOT PRINT A NEW CONNECTION LIST!! IT IS WORKING THOUGH 
@@ -133,7 +136,25 @@ io.on('connection', function(socket)
         {
             console.log(`target index undefined! nameColor change failed.`);
         }
-    });
 
+        userListUpdate();
+    });
 }); 
+
+function userListUpdate()
+{
+    // '<div class="message-name"  style="background-color: ' + data.namecolor + '; border-color: ' + data.bordercolor + ';">'
+
+    let updatedHTML = '';
+
+    for(let i = 0; i < connectionList.length; i++)
+    {
+        if(connectionList[i] != undefined)
+        {
+            updatedHTML += '<div class="user-list-entry" style="background-color:' + connectionList[i].nameColor + '; border-color:' + `color-mix(in srgb, ${connectionList[i].nameColor} 90%, white 10% )` + '">' + '<h2>' + connectionList[i].username + '</h2>' + '</div>';
+        }  
+    }
+
+    io.sockets.emit('userListUpdate', updatedHTML);
+}
 

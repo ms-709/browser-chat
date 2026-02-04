@@ -8,7 +8,9 @@ var chatWindow = document.getElementById('chat-window'),
     usernameBox = document.getElementById('username-box'),
 
     sampleMessageName = document.getElementById('sample-message-name'),
-    nameColorPicker = document.getElementById('name-color-picker');
+    nameColorPicker = document.getElementById('name-color-picker'),
+
+    userList = document.getElementById('user-list');
 
 //---------- STYLE VARS ----------//
 var messageNameColor = nameColorPicker.value,
@@ -111,4 +113,9 @@ socket.on('sendMessage', function(data)
 socket.on('userDisconnect', function(userDisconnectID)
 {
     console.log(`disconnect ID:`, userDisconnectID);
+});
+
+socket.on('userListUpdate', function(updatedHTML)
+{
+    userList.innerHTML = updatedHTML;
 });
